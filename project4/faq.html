@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <title>CS 32 Project 4 FAQ, Winter 2023</title>
+</head>
+<body>
+<div align="right">
+Winter 2023 CS 32
+</div>
+<div align="center">
+<h2>Project 4 FAQ</h2>
+</div>
+<ol>
+<li>
+<p>
+<strong>My program seems to run correctly, but runs awfully slowly, and I
+know it's not because of bad algorithms.  How can I speed it up?</strong>
+</p><p>
+Especially if it's Visual C++, it may be that you're building in the Debug
+configuration, which inserts code to check for many STL usage errors.
+These are helpful during debugging, but can slow things down.  Follow the
+instructions in <a href="../../Homeworks/4/spec.html#P7">Homework 4</a>, problem
+7 to build an optimized version.
+</p>
+</li>
+<li>
+<p>
+<strong>My program works fine on Windows, but not under g32.  It looks like
+when it reads from one of the .txt files, every line ends with a character
+whose encoding is 13.  What's going on?</strong>
+</p></p>
+Text files on Windows systems normally have lines that end with '\r' '\n'
+(carriage return, linefeed).  In ASCII '\r' is encoded as 13.  On macOS, Linux,
+and other UNIX-based systems, lines end with just '\n'.  The input libraries
+for C and C++ on Windows strip off the '\r' when you read the file, so you
+never see it.
+</p><p>
+The .txt files we gave you have lines ending with just '\n', and will work on
+Windows as well.  What you must have done is, on Windows, either edited one
+or both of those files or created your own files with a Windows editor.  In
+either case, the editor would save the file with '\r' '\n' line endings, and
+you transferred that file to the Linux server, where the '\r' is not stripped
+off when reading the file.
+</p><p>
+To strip off the '\r' from the file, on the Linux server run the dos2unix
+command, e.g.
+</p>
+<pre>
+	dos2unix whatever.txt
+</pre>
+<p>
+This will replace the whatever.txt file with a version that does not have
+the '\r' characters, so will be fine for your program.
+</p>
+</li>
+<li>
+<p>
+<strong>Is there a technique to help us find memory leaks?</strong>
+</p></p>
+To help you determine what's being leaked, the leak messages tell you how
+many bytes each leaked object is.  Test your program with a comparatively
+small number of users and movies and see that you still get leaks.  Then,
+add, say, a 200-character array data member to User, a 400-character array
+member to Movie, and so on for other structs/classes, a noticeably different
+size for each type.  Then, if a message tells you you're leaking something a
+little over 400 bytes, say, you know it's a Movie, so you can focus your
+attention on <code>new</code> and <code>delete</code> expressions and
+pointers relating to Movies.
+</p><p>
+Check your code for every occurrence of <code>new</code> for that type, and
+for each occurrence, determine where every object created by that
+<code>new</code> expression will have a <code>delete</code> expression
+executed to get rid of it.  
+</p>
+</li><li>
+<p>
+<strong>The spec says that when ordering recommendations, the final tiebreaker
+for movies with the same compatibility scores and the same ratings should be
+"alphabetical order".  What about non-alphabetic characters?  What about
+case-sensitivity?</strong>
+</p><p>
+We've come to realize that that's bad wording:  It doesn't give a clue as to
+what the order of "eHero", "Exit", "EXIT", and "1984" should be.  Everyone is
+using whatever ordering their machine's character encoding imposes (which
+presumably is ASCII), except possibly doing case-insensitive comparisons, and
+perhaps further not necessarily always putting "Exit" before "EXIT" or always
+putting "EXIT" before "Exit", but sometimes doing one and sometimes the other,
+probably depending on how the sort function moves things around.
+</p><p style="margin-bottom: 0">
+So we'll accept any of those orderings for that final tiebreaker.  This means
+(assuming everyone is on a machine using ASCII):
+</p>
+<ul style="margin-top: 0; margin-bottom: 0">
+<li>If you choose to do a case-sensitive ordering, the strings mentioned above
+would be ordered "1984", "EXIT", "Exit", "eHero".</li>
+<li>If you choose to do a case-insensitive ordering, the strings mentioned
+above would be ordered "1984", "eHero", "EXIT", "Exit", or would be ordered
+"1984", "eHero", "Exit", "EXIT".</li>
+</ul>
+</p>
+</li>
+</ol>
+</body>
+</html>
