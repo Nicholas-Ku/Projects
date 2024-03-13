@@ -1,0 +1,55 @@
+ID001
+Movie A
+2022
+Director A
+Actor A
+Genre A
+4.5
+
+ID002
+Movie B
+2022
+Director B
+Actor B
+Genre B
+3.8
+
+ID003
+Movie C
+2022
+Director C
+Actor C
+Genre C
+4.2
+
+ID004
+Movie D
+2022
+Director D
+Actor D
+Genre D
+4.0
+
+ID005
+Movie E
+2022
+Director E
+Actor E
+Genre E
+4.2
+
+ID006
+Movie F
+2022
+Director E
+Actor F
+Genre F
+4.5
+
+ID007
+Movie G
+2022
+Director E
+Actor G
+Genre G
+4.5
