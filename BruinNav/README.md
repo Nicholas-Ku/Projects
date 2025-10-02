@@ -1,3 +1,18 @@
-# Title of Project
+# BruinNav
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+BruinNav is a small C++ program that loads a street map, finds a route between two places using the A* pathfinding algorithm, and prints clear, human-readable turn-by-turn directions.
+
+---
+
+## Overview
+- **Input:** a text map file with streets + intersections + attractions (place names/addresses).
+- **Output:** a sequence of steps like “Proceed 0.12 miles east on …; Turn left onto …” plus total distance.
+- **Core idea:** model the map as a graph of street segments; use **A\*** (with straight-line distance heuristic) to find a low-cost path; convert the path into readable instructions.
+
+---
+
+## Features
+- Start/end by **attraction or address name** (resolved to coordinates).
+- **A\*** routing on a street-segment graph (efficient and optimal with an admissible heuristic).
+- **Directions you can read:** proceed segments, left/right turns, distances, and headings.
+- Clear status results: success, no route, or bad start/end.
