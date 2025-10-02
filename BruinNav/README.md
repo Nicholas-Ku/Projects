@@ -1,6 +1,6 @@
 # BruinNav
 
-BruinNav is a small C++ program that loads a street map, finds a route between two places using the A* pathfinding algorithm, and prints clear, human-readable turn-by-turn directions.
+BruinNav is a C++ program that loads a street map, finds a route between two places using the A* pathfinding algorithm, and prints clear, human-readable turn-by-turn directions.
 
 ---
 
